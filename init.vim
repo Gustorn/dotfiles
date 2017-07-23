@@ -40,7 +40,13 @@ endif
 filetype plugin indent on
 syntax on
 
-set termguicolors
+if has('unix') && has('termguicolors')
+  set termguicolors
+endif
+
+if has('win32') || has('win64')
+  let g:onedark_termcolors=16
+endif
 colorscheme onedark
 
 set hidden
@@ -73,11 +79,12 @@ if has('unix')
 endif
 
 if has('win32') || has('win64')
-  let g:python_host_prog = 'py -2'
-  let g:python3_host_prog = 'py -3'
+  let g:python_host_prog = 'C:\Python2\python.exe'
+  let g:python3_host_prog = 'C:\Python3\python.exe'
 endif
 
 let mapleader = "\<Space>"
+let g:airline_theme='onedark'
 let g:airline_powerline_fonts = 1
 let g:ctrlp_user_command = 'rg --files %s'
 let g:deoplete#enable_at_startup=1
@@ -89,7 +96,7 @@ let g:LanguageClient_serverCommands = {
   \ 'typescript': ['~/.local/lib/node_modules/javascript-typescript-langserver/lib/language-server-stdio.js'],
   \ }
 
-map <C-n> :NERDTreeToggle<CR>
+map <Leader>f :NERDTreeToggle<CR>
 map <Leader> <Plug>(easymotion-prefix)
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
