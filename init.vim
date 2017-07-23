@@ -65,15 +65,20 @@ set nobackup
 set noswapfile
 set laststatus=2
 
-let mapleader = "\<Space>"
-let g:airline_powerline_fonts = 1
-let g:python_host_prog = '/usr/bin/python2'
-let g:python3_host_prog = '/usr/bin/python3'
 
 if has('unix')
   let g:ctrlp_match_func = {'match': 'cpsm#CtrlPMatch'}
+  let g:python_host_prog = '/usr/bin/python2'
+  let g:python3_host_prog = '/usr/bin/python3'
 endif
 
+if has('win32') || has('win64')
+  let g:python_host_prog = 'py -2'
+  let g:python3_host_prog = 'py -3'
+endif
+
+let mapleader = "\<Space>"
+let g:airline_powerline_fonts = 1
 let g:ctrlp_user_command = 'rg --files %s'
 let g:deoplete#enable_at_startup=1
 let g:airline#extensions#tabline#enabled = 1
